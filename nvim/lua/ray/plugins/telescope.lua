@@ -1,6 +1,11 @@
-return{ 
-  'nvim-telescope/telescope.nvim', tag = '0.1.3',
-  dependencies = { 'nvim-lua/plenary.nvim', { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }  },
+return {
+  "nvim-telescope/telescope.nvim",
+  tag = "0.1.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    "nvim-tree/nvim-web-devicons",
+  },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
@@ -24,9 +29,13 @@ return{
     local keymap = vim.keymap -- for conciseness
 
     keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-    keymap.set("n", "<leader>gf", "<cmd>Telescope git_files<cr>", {desc = "Fuzzy find files in cwd, respects .gitignore"})     
+    keymap.set(
+      "n",
+      "<leader>gf",
+      "<cmd>Telescope git_files<cr>",
+      { desc = "Fuzzy find files in cwd, respects .gitignore" }
+    )
     keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Fuzzy grep files in cwd" })
     keymap.set("n", "<leader>bf", "<cmd>Telescope buffers<cr>", { desc = "Lists open buffers in current instance" })
-
   end,
 }
